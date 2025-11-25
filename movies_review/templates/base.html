@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}MovieReview{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "style.css" %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">MovieReview</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url "page_index" %}" class="{% if selected_page is null or selected_page == "index" %}{{"active"}}{% endif %}">Accueil</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn {% if selected_page == "categorie" %}{{"active"}}{% endif %}">Catégories</a>
+                        <div class="dropdown-content">
+                            <a href="{% url "page_index" %}">Tous les films</a>
+                            {% for categorie in categories %}
+                            <a href="{% url "page_categories" id=categorie.id %}">{{ categorie }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="search-container">
+                        <form id="search-form" method="get" action="">
+                            <input type="text" placeholder="Rechercher un film..." id="search-input">
+                        </form>
+                    </li>
+                    <li class="auth-link">
+                        <a href="connexion.html" class="{% if selected_page == "connexion" %}{{"active"}}{% endif %}">Connexion</a> / 
+                        <a href="inscription.html" class="{% if selected_page == "inscription" %}{{"active"}}{% endif %}">Inscription</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 MovieReview - Tous droits réservés</p>
+        </div>
+    </footer>
+</body>
+</html>

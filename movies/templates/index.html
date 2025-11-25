@@ -1,0 +1,48 @@
+
+{% extends "base.html" %}
+
+{% block page_title %}MovieReview - Accueil{% endblock %}
+
+{% block body %}
+
+<h1 class="page-title">Films populaires</h1>
+        
+<div class="category-filter">
+    <span id="current-category">Tous les films</span>
+</div>
+
+<div class="movies-grid">
+    {% for film in object_list %}
+    <div class="movie-card">
+        <a href="{% url "page_details" id=film.id %}">
+            <img alt="Inception" class="movie-cover" src="{{ film.couverture.url }}">
+            <div class="movie-info">
+                <h3 class="movie-title">{{ film.titre }}</h3>
+                <p class="movie-year">{{ film.annee }}</p><span class="movie-category">{{ film.categorie }}</span>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+<!-- pagination -->
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+<!-- /pagination -->
+
+{% endblock %}

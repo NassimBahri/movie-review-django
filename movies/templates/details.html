@@ -1,0 +1,92 @@
+
+{% extends "base.html" %}
+
+{% block page_title %}MovieReview - Détails{% endblock %}
+
+{% block body %}
+
+<div class="movie-details">
+    <div class="movie-poster"><img alt="{{ film.titre }}" id="detail-poster" src="{{ film.couverture.url }}"></div>
+    <div class="movie-content">
+        <div class="movie-header">
+            <h1 class="movie-title-large" id="detail-title">{{ film.titre }}</h1>
+            <div class="movie-meta">
+                <span id="detail-year">{{ film.annee }}</span> <span id="detail-category">{{ film.categorie }}</span> <span id="detail-duration">{{ film.duree }}</span>
+            </div>
+            <div class="movie-rating">
+                <div class="rating-stars">
+                    ★★★★★
+                </div>
+                <div class="rating-value" id="detail-rating">
+                    4.8/5
+                </div>
+            </div>
+        </div>
+        <div class="movie-description" id="detail-description">
+            {{ film.description }}
+        </div>
+    </div>
+</div>
+<div class="comments-section">
+    <h2 class="section-title">Commentaires</h2>
+    <div class="comment-form">
+        <h3>Ajouter un commentaire</h3>
+        <form id="comment-form" name="comment-form">
+            <div class="form-group">
+                <label for="user-name">Votre nom</label> <input id="user-name" required="" type="text">
+            </div>
+            <div class="form-group">
+                <label for="user-comment">Votre commentaire</label> 
+                <textarea id="user-comment" required="" rows="4"></textarea>
+            </div>
+            <div class="form-group rating-input">
+                <label for="user-rating">Votre note</label> <select id="user-rating" required="">
+                    <option value="">
+                        Choisir une note
+                    </option>
+                    <option value="5">
+                        5 étoiles
+                    </option>
+                    <option value="4">
+                        4 étoiles
+                    </option>
+                    <option value="3">
+                        3 étoiles
+                    </option>
+                    <option value="2">
+                        2 étoiles
+                    </option>
+                    <option value="1">
+                        1 étoile
+                    </option>
+                </select>
+            </div><button class="submit-btn" type="submit">Publier le commentaire</button>
+        </form>
+    </div>
+    <div class="comments-list" id="comments-container">
+        <div class="comment">
+            <div class="comment-header">
+                <span class="comment-author">Jean Dupont</span>
+                <div>
+                    <span class="comment-rating">★★★★★</span> <span class="comment-date">15/03/2023</span>
+                </div>
+            </div>
+            <div class="comment-text">
+                Un film incroyable avec un scénario complexe et des effets spéciaux à couper le souffle.
+            </div>
+        </div>
+        <div class="comment">
+            <div class="comment-header">
+                <span class="comment-author">Marie Martin</span>
+                <div>
+                    <span class="comment-rating">★★★★☆</span> <span class="comment-date">10/02/2023</span>
+                </div>
+            </div>
+            <div class="comment-text">
+                J'ai adoré le concept mais j'ai eu un peu de mal à suivre toutes les subtilités de l'intrigue.
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

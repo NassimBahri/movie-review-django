@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+{% block page_title %}MovieReview - Accueil{% endblock %}
+
+{% block body %}
+
+<h1 class="page-title">{{ categorie.titre }}</h1>
+        
+<div class="category-filter">
+    <span id="current-category">Tous les films</span>
+</div>
+
+<div class="movies-grid">
+    {% if object_list is empty %}
+    <div>Aucun film trouvé!</div>
+    {% else %}
+    {% for film in object_list %}
+    <div class="movie-card">
+        <a href="{% url "page_details" id=film.id %}">
+            <img alt="Inception" class="movie-cover" src="{{ film.couverture.url }}">
+            <div class="movie-info">
+                <h3 class="movie-title">{{ film.titre }}</h3>
+                <p class="movie-year">{{ film.annee }}</p><span class="movie-category">{{ film.categorie }}</span>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}
